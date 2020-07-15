@@ -13,7 +13,6 @@ class MainActivity : AppCompatActivity() {
         //master 3.4
         //feature 3.1
         //feature 3.2
-        //feature 3.3
 
     }
 }
