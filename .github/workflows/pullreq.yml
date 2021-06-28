@@ -1,9 +1,8 @@
 name: Staging Auto-PR
 on:
   push:
-    if: contains(github.event.head_commit.message, 'pullrequest') && !contains(github.event.pull_request.head.ref,
+    with: contains(github.event.head_commit.message, 'pullrequest') && !contains(github.event.pull_request.head.ref,
     'release/')
-
 jobs:
   pull-request:
     name: Open PR to main
