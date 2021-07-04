@@ -17,13 +17,13 @@ jobs:
        find: 'pullrequest'
        replace: ''
     - if : contains(github.event.head_commit.message, 'pullrequest')
-        uses: repo-sync/pull-request@v2
-        name: pull-request
-        with:
-          destination_branch: "development"
-          pr_title: "${{ steps.replaceCommentMsg.output.value }}"
-          pr_template: "./pull_request_template.md"
-          pr_assignee : "${{ github.event.schedule.user.login }}"
-          pr_draft: true
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      uses: repo-sync/pull-request@v2
+      name: pull-request
+      with:
+        destination_branch: "development"
+        pr_title: "${{ steps.replaceCommentMsg.output.value }}"
+        pr_template: "./pull_request_template.md"
+        pr_assignee : "${{ github.event.schedule.user.login }}"
+        pr_draft: true
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         
