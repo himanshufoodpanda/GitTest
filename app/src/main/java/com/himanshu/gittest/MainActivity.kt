@@ -8,15 +8,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //master 4.1
-        //master 4.2
-        //master 4.3
-        //testing pull
-        //testing 2
-        //3
-        //4
-        //hello test
-        //Test 5
-        //Test 6
 
     }
 }
