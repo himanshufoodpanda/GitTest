@@ -24,7 +24,7 @@ jobs:
         pr_title: "${{ steps.replaceCommentMsg.outputs.value }}"
         pr_template: "./pull_request_template.md"
         pr_assignee : "${{ github.event.schedule.user.login }}"
-        pr_label : "Awaiting Review"
+        pr_label : "bug"
         pr_draft: true
         github_token: ${{ secrets.GITHUB_TOKEN }}
         
