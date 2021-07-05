@@ -21,7 +21,7 @@ jobs:
       name: pull-request
       with:
         destination_branch: "development"
-        pr_title: "${{ steps.replaceCommentMsg.output.value }}"
+        pr_title: "${{ steps.replaceCommentMsg.outputs.value }}"
         pr_template: "./pull_request_template.md"
         pr_assignee : "${{ github.event.schedule.user.login }}"
         pr_draft: true
