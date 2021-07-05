@@ -1,7 +1,7 @@
 name: Staging Auto-PR
 on:
   push:
-    with: contains(github.event.head_commit.message, 'pullrequest') && !contains(github.event.pull_request.head.ref,'release/');
+    with: contains(github.event.head_commit.message, 'pullreq') && !contains(github.event.pull_request.head.ref,'release/');
 jobs:
   pull-request:
     name: Open PR to main
@@ -16,7 +16,7 @@ jobs:
        source: ${{ github.event.head_commit.message }}
        find: 'pullreq'
        replace: ''
-    - if : contains(github.event.head_commit.message, 'pullrequest')
+    - if : contains(github.event.head_commit.message, 'pullreq')
       uses: repo-sync/pull-request@v2
       name: pull-request
       with:
