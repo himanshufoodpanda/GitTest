@@ -7,24 +7,23 @@ jobs:
     name: Open PR to main
     runs-on: ubuntu-latest
     steps:
+    - if: contains(github.event.head_commit.message, 'pullrequest')
+      name: checkout
+      uses: actions/checkout@v2
     - uses: mad9000/actions-find-and-replace-string@2
       id: replaceCommentMsg
       with:
-       source: ${{ github.event.head_commit.message }} # this translates to ref/heads/main on the main branch, but can be any arbitrary string 
-       find: '//pullrequest'        # we want to remove ref/heads/ from source 
-       replace: ''    
-  
+       source: ${{ github.event.head_commit.message }}
+       find: 'pullrequest'
+       replace: ''
     - if : contains(github.event.head_commit.message, 'pullrequest')
-        name: checkout
-        uses: actions/checkout@v2
-
-    - if : contains(github.event.head_commit.message, 'pullrequest')
-        uses: repo-sync/pull-request@v2
-        name: pull-request
-        with:
-          destination_branch: "development"
-          pr_title: "${{ steps.replaceCommentMsg.output.value }}"
-          pr_template: "./pull_request_template.md"
-          pr_draft: true
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+      uses: repo-sync/pull-request@v2
+      name: pull-request
+      with:
+        destination_branch: "development"
+        pr_title: "${{ steps.replaceCommentMsg.outputs.value }}"
+        pr_template: "./pull_request_template.md"
+        pr_assignee : "${{ github.event.schedule.user.login }}"
+        pr_draft: true
+        github_token: ${{ secrets.GITHUB_TOKEN }}
         
