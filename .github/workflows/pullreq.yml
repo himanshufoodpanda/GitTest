@@ -13,14 +13,14 @@ jobs:
     name: Open PR to main
     runs-on: ubuntu-latest
     steps:
-    - if: contains(github.event.head_commit.message, PR_COMMIT_HIT)
+    - if: contains(github.event.head_commit.message, env.PR_COMMIT_HIT)
       name: checkout
       uses: actions/checkout@v2
     - uses: mad9000/actions-find-and-replace-string@2
       id: replaceCommentMsg
       with:
        source: ${{ github.event.head_commit.message }}
-       find: PR_COMMIT_HIT
+       find: env.PR_COMMIT_HIT
        replace: ''
     - if : contains(github.event.head_commit.message, 'pullrequest')
       uses: repo-sync/pull-request@v2
@@ -32,5 +32,5 @@ jobs:
         pr_assignee : "${{ github.event.schedule.user.login }}"
         pr_label : "Awaiting review"
         pr_draft: true
-        github_token: GITHUB_TOKEN
+        github_token: env.GITHUB_TOKEN
         
