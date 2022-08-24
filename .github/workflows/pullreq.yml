@@ -1,10 +1,8 @@
-
+name: Staging Auto-PR
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   PR_URL: ${{ github.event.pull_request.html_url }}
   PR_COMMIT_HIT: '//PR'
-
-name: Staging Auto-PR
 on:
   push:
     with: contains(github.event.head_commit.message, 'pullrequest') && !contains(github.event.pull_request.head.ref,'release/');
