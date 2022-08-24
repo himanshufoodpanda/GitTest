@@ -36,7 +36,7 @@ jobs:
         destination_branch: "development"
         pr_title: "${{ steps.replaceCommentMsg.outputs.value }}"
         pr_template: "./pull_request_template.md"
-        pr_assignee : "${{ github.owner.name }}"
+        pr_assignee : "${{ github.event.head_commit.author.username }}"
         pr_label : "Awaiting review"
         pr_draft: false
         github_token: $GITHUB_TOKEN
