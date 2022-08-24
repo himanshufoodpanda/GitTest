@@ -8,26 +8,29 @@ on:
     with: contains(github.event.head_commit.message, $PR_COMMIT_HIT) && !contains(github.event.pull_request.head.ref,'release/');
 jobs:
   pull-request:
-    name: Open PR to main
+    -name: Open PR to main
     runs-on: ubuntu-latest
     steps:
-    - if : contains(github.event.head_commit.message,env.PR_COMMIT_HIT)
-      name: Run find-and-replace to remove //PR
-      uses: mad9000/actions-find-and-replace-string@2
-      id: replaceCommentMsg
-      with:
-       source: ${{ github.event.head_commit.message }}
-       find: "${{env.PR_COMMIT_HIT}}"
-       replace: ''
-    - if : contains(github.event.head_commit.message,env.PR_COMMIT_HIT)
-      uses: repo-sync/pull-request@v2
-      name: pull-request
-      with:
-        destination_branch: "development"
-        pr_title: "${{ steps.replaceCommentMsg.outputs.value }}"
-        pr_template: "./pull_request_template.md"
-        pr_assignee : "${{ github.owner.name }}"
-        pr_label : "Awaiting review"
-        pr_draft: false
-        github_token: $GITHUB_TOKEN
+      - if: contains(github.event.head_commit.message, $PR_COMMIT_HIT)
+          name: checkout
+          uses: actions/checkout@v2
+      - if: contains(github.event.head_commit.message,env.PR_COMMIT_HIT)
+        name: Run find-and-replace to remove //PR
+        uses: mad9000/actions-find-and-replace-string@2
+        id: replaceCommentMsg
+        with:
+          source: ${{ github.event.head_commit.message }}
+          find: "${{env.PR_COMMIT_HIT}}"
+          replace: ''
+      - if: contains(github.event.head_commit.message,env.PR_COMMIT_HIT)
+        uses: repo-sync/pull-request@v2
+        name: pull-request
+        with:
+          destination_branch: "development"
+          pr_title: "${{ steps.replaceCommentMsg.outputs.value }}"
+          pr_template: "./pull_request_template.md"
+          pr_assignee: "${{ github.owner.name }}"
+          pr_label: "Awaiting review"
+          pr_draft: false
+          github_token: $GITHUB_TOKEN
 
