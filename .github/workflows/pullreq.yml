@@ -3,6 +3,9 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   PR_URL: ${{ github.event.pull_request.html_url }}
   PR_COMMIT_HIT: //PR
+  DESTINATION: "development"
+  AW_REVIEW: "Awaiting review"
+  ASSIGNEE: ${{ github.event.head_commit.author.username }}
 on:
   push:
     branches-ignore:
@@ -27,11 +30,11 @@ jobs:
       uses: repo-sync/pull-request@v2
       name: pull-request
       with:
-        destination_branch: "development"
+        destination_branch: $DESTINATION
         pr_title: "${{ steps.replaceCommentMsg.outputs.value }}"
         pr_template: "./pull_request_template.md"
-        pr_assignee : "${{ github.event.head_commit.author.username }}"
-        pr_label : "Awaiting review"
+        pr_assignee : $ASSIGNEE
+        pr_label : $AW_REVIEW
         pr_draft: false
         github_token: $GITHUB_TOKEN
 
