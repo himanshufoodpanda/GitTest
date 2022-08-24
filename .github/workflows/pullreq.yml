@@ -5,7 +5,8 @@ env:
   PR_COMMIT_HIT: //PR
 on:
   push:
-    with: contains(github.event.head_commit.message, $PR_COMMIT_HIT) && !contains(github.event.pull_request.head.ref,'release/');
+    branches:
+      - '!release**'
 jobs:
   pull-request:
     name: Open PR to main
@@ -14,13 +15,6 @@ jobs:
     - if : contains(github.event.head_commit.message,env.PR_COMMIT_HIT)
       name: checkout
       uses: actions/checkout@v2
-    - name: testing
-      run: |
-        echo "My Id: ${{ github.event.head_commit.author.username }}"
-    - name: Show GitHub context
-      env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: echo "$GITHUB_CONTEXT"
     - if : contains(github.event.head_commit.message,env.PR_COMMIT_HIT)
       name: Run find-and-replace to remove //PR
       uses: mad9000/actions-find-and-replace-string@2
