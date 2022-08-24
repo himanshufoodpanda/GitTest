@@ -5,20 +5,20 @@ env:
   PR_COMMIT_HIT: "//PR"
 on:
   push:
-    with: contains(github.event.head_commit.message, "$PR_COMMIT_HIT") && !contains(github.event.pull_request.head.ref,'release/');
+    with: contains(github.event.head_commit.message, $PR_COMMIT_HIT) && !contains(github.event.pull_request.head.ref,'release/');
 jobs:
   pull-request:
     name: Open PR to main
     runs-on: ubuntu-latest
     steps:
-    - if: contains(github.event.head_commit.message, "$PR_COMMIT_HIT")
+    - if: contains(github.event.head_commit.message, $PR_COMMIT_HIT)
       name: checkout
       uses: actions/checkout@v2
     - uses: mad9000/actions-find-and-replace-string@2
       id: replaceCommentMsg
       with:
        source: ${{ github.event.head_commit.message }}
-       find: "$PR_COMMIT_HIT"
+       find: $PR_COMMIT_HIT
        replace: ''
     - if : contains(github.event.head_commit.message, 'pullrequest')
       uses: repo-sync/pull-request@v2
