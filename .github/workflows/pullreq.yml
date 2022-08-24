@@ -29,11 +29,8 @@ jobs:
         destination_branch: "development"
         pr_title: "${{ steps.replaceCommentMsg.outputs.value }}"
         pr_template: "./pull_request_template.md"
-        pr_assignee : "${{ github.event.user.login }}"
+        pr_assignee : "${{ github.owner.name }}"
         pr_label : "Awaiting review"
         pr_draft: true
         github_token: $GITHUB_TOKEN
-    - name: Show GitHub context
-      env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: echo "$GITHUB_CONTEXT"
+
