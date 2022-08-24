@@ -1,3 +1,9 @@
+
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  PR_URL: ${{ github.event.pull_request.html_url }}
+  PR_COMMIT_HIT: '//PR'
+
 name: Staging Auto-PR
 on:
   push:
@@ -24,7 +30,7 @@ jobs:
         pr_title: "${{ steps.replaceCommentMsg.outputs.value }}"
         pr_template: "./pull_request_template.md"
         pr_assignee : "${{ github.event.schedule.user.login }}"
-        pr_label : "Awaiting Review"
+        pr_label : "Awaiting review"
         pr_draft: true
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        github_token: GITHUB_TOKEN
         
