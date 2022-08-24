@@ -31,5 +31,5 @@ jobs:
         pr_assignee : "${{ github.event.schedule.user.login }}"
         pr_label : "Awaiting review"
         pr_draft: true
-        github_token: "$GITHUB_TOKEN"
+        github_token: $GITHUB_TOKEN
         
