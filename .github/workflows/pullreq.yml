@@ -30,11 +30,11 @@ jobs:
       uses: repo-sync/pull-request@v2
       name: pull-request
       with:
-        destination_branch: $DESTINATION
+        destination_branch: "${{env.$DESTINATION}}"
         pr_title: "${{ steps.replaceCommentMsg.outputs.value }}"
         pr_template: "./pull_request_template.md"
         pr_assignee : $ASSIGNEE
-        pr_label : $AW_REVIEW
+        pr_label : "${{env.AW_REVIEW}}"
         pr_draft: false
         github_token: $GITHUB_TOKEN
 
