@@ -30,7 +30,7 @@ jobs:
       uses: repo-sync/pull-request@v2
       name: pull-request
       with:
-        destination_branch: "${{env.$DESTINATION}}"
+        destination_branch: "${{env.DESTINATION}}"
         pr_title: "${{ steps.replaceCommentMsg.outputs.value }}"
         pr_template: "./pull_request_template.md"
         pr_assignee : $ASSIGNEE
