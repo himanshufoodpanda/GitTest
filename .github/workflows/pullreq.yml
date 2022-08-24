@@ -11,7 +11,7 @@ jobs:
     name: Open PR to main
     runs-on: ubuntu-latest
     steps:
-    - if: contains(github.event.head_commit.message, $PR_COMMIT_HIT)
+    - if : contains(github.event.head_commit.message,env.PR_COMMIT_HIT)
       name: checkout
       uses: actions/checkout@v2
     - if : contains(github.event.head_commit.message,env.PR_COMMIT_HIT)
