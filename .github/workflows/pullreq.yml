@@ -17,6 +17,10 @@ jobs:
     - name: testing
       run: |
         echo "My Id: ${{ github.owner.name }}"
+    - name: Show GitHub context
+      env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
     - if : contains(github.event.head_commit.message,env.PR_COMMIT_HIT)
       name: Run find-and-replace to remove //PR
       uses: mad9000/actions-find-and-replace-string@2
