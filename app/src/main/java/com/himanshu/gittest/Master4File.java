@@ -1,9 +1,9 @@
 package com.himanshu.gittest;
 
 public class Master4File {
-public void hello(){
-//System.out.println("fdjdk");
-}
+    public void hello() {
+        System.out.println("fdjdk");
+    }
 
 /*
 *  - name: Show GitHub context
