@@ -20,7 +20,7 @@ jobs:
       id: replaceCommentMsg
       with:
        source: ${{ github.event.head_commit.message }}
-       find: "$env.PR_COMMIT_HIT"
+       find: "${{env.PR_COMMIT_HIT}}"
        replace: ''
     - if : contains(github.event.head_commit.message,env.PR_COMMIT_HIT)
       uses: repo-sync/pull-request@v2
