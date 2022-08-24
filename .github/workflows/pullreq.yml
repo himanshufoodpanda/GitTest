@@ -5,8 +5,8 @@ env:
   PR_COMMIT_HIT: //PR
 on:
   push:
-    branches:
-      - '!release**'
+    branches-ignore:
+      - 'release**'
 jobs:
   pull-request:
     name: Open PR to main
