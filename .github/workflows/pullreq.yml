@@ -15,7 +15,8 @@ jobs:
     - if: contains(github.event.head_commit.message, env.PR_COMMIT_HIT)
       name: checkout
       uses: actions/checkout@v2
-    - uses: mad9000/actions-find-and-replace-string@2
+    - name: Run find-and-replace to remove //PR
+      uses: mad9000/actions-find-and-replace-string@2
       id: replaceCommentMsg
       with:
        source: ${{ github.event.head_commit.message }}
